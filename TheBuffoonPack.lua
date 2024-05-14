@@ -122,7 +122,7 @@ function SMODS.INIT.Me_TheBuffoonPack()
     }, 2, 5, true, true, true, true)
     Mansion:register()
     SMODS.Jokers.j_Mansion.calculate = function(self,context)
-        if context.after and context.scoring_name == 'Full House' then
+        if context.after and next(context.poker_hands['Straight']) then
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 1,
@@ -170,7 +170,7 @@ function SMODS.INIT.Me_TheBuffoonPack()
     -- END CALENDAR
     -- START MICROSCOPE
     SMODS.Sprite:new("j_Microscope", thismod.path, "j_Microscope.png",71,95, "asset_atli"):register();
-    local Microscope = SMODS.Joker:new('Microscope Joker', 'Microscope', {mult=4}, {x=0, y=0}, {
+    local Microscope = SMODS.Joker:new('Microscope Joker', 'Microscope', {mult=3}, {x=0, y=0}, {
         name= 'Temple',
         text= {'{C:red}+#1#{} Mult', 'Played {C:attention}#2#{} of {C:attention}#3#{} give this +3 mult', '{C:inactive}(Card changes at the beginning of each round){}'}
     }, 2, 7, true, true, true, true)
