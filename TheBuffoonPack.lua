@@ -122,7 +122,7 @@ function SMODS.INIT.Me_TheBuffoonPack()
     }, 2, 5, true, true, true, true)
     Mansion:register()
     SMODS.Jokers.j_Mansion.calculate = function(self,context)
-        if context.after and next(context.poker_hands['Straight']) then
+        if context.after and next(context.poker_hands['Full House']) then
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 1,
