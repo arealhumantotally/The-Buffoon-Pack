@@ -2,6 +2,7 @@ The Buffoon Pack is a balatro mod adding 5 jokers, which are listed below.
 The Buffoon Pack does not currently require lovely, however it will in the future.
 
 JOKERS
+
 Calendar -- Common
 Played 7s have a 1 in 7 chance to grant an additional hand
 (Up to 5 per round)
