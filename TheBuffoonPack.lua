@@ -215,6 +215,13 @@ function SMODS.INIT.Me_TheBuffoonPack()
     SMODS.Jokers.j_Microscope.loc_def = function(card)
         return {card.ability.mult,card.ability.targettedrank, card.ability.targettedsuit}
     end
+    -- SPECTRAL CARDS BEGIN HERE
+    -- EXORCIST CODE BEGINS HERE
+    SMODS.Sprite:new("c_Exorcist", thismod.path, "c_SpectralBase.png",71,95, "asset_atli"):register();
+    local Exorcist = SMODS.Spectral:new('Exorcist', 'Exorcist', {}, { x = 0, y = 0 }, {
+        name = 'Exorcist',
+        text = { 'If hands, hand size, or discards are below default value', 'increase one by one.' }
+    }, 4)
 end
 
 
