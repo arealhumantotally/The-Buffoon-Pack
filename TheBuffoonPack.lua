@@ -220,8 +220,64 @@ function SMODS.INIT.Me_TheBuffoonPack()
     SMODS.Sprite:new("c_Exorcist", thismod.path, "c_SpectralBase.png",71,95, "asset_atli"):register();
     local Exorcist = SMODS.Spectral:new('Exorcist', 'Exorcist', {}, { x = 0, y = 0 }, {
         name = 'Exorcist',
-        text = { 'If hands, hand size, or discards are below default value', 'increase one by one.' }
-    }, 4)
+        text = { 'If base hands, base hand size, or base discards are below default value', 'increase one by one.' }
+    }, 4, nil, true):register()
+    SMODS.Spectrals.c_Exorcist.can_use = function(card)
+        local ReducedValues = {}
+        if G.GAME.starting_params.hand_size > G.hand.config.card_limit then
+            ReducedValues[#ReducedValues+1] = "Handsize"
+        end
+        if G.GAME.starting_params.discards > G.GAME.round_resets.discards then
+            ReducedValues[#ReducedValues+1] = "Discards"
+        end
+        if G.GAME.starting_params.hands > G.GAME.round_resets.hands then
+            ReducedValues[#ReducedValues+1] = "Hands"
+        end
+        if ReducedValues[1] then
+            return true
+        end
+        return false
+    end
+    SMODS.Spectrals.c_Exorcist.use = function(card, area, copier) 
+        local ReducedValues = {}
+        local JokerHands = 0
+        local JokerDiscards = 0
+        local JokerSize = 0
+        for _, i in ipairs(G.jokers.cards) do
+            if i.ability.h_plays then
+                JokerHands = JokerHands + i.ability.h_plays
+            end
+            if i.ability.d_size then
+                JokerDiscards = JokerDiscards + i.ability.d_size
+            end
+            if i.ability.h_size then
+                JokerSize = JokerSize + i.ability.h_size
+            end
+        end
+        if G.GAME.starting_params.hand_size > G.hand.config.card_limit - JokerSize then
+            ReducedValues[#ReducedValues+1] = "Handsize"
+        end
+        if G.GAME.starting_params.discards > G.GAME.round_resets.discards - JokerDiscards then
+            ReducedValues[#ReducedValues+1] = "Discards"
+        end
+        if G.GAME.starting_params.hands > G.GAME.round_resets.hands - JokerHands then
+            ReducedValues[#ReducedValues+1] = "Hands"
+        end
+        if ReducedValues[1] then
+            local WhatToIncrease = pseudorandom_element(ReducedValues, pseudoseed("Exorcist"))
+            if WhatToIncrease == "Handsize" then
+                G.hand:change_size(1)
+            end
+            if WhatToIncrease == "Hands" then
+                G.GAME.round_resets.hands = G.GAME.round_resets.hands + 1
+                ease_hands_played(1)
+            end
+            if WhatToIncrease == "Discards" then
+                G.GAME.round_resets.discards = G.GAME.round_resets.discards + 1
+                ease_discard(1)
+            end
+        end
+    end
 end
 
 
