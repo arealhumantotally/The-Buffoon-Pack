@@ -154,6 +154,7 @@ function SMODS.INIT.Me_TheBuffoonPack()
                 if pseudorandom('calendar') < G.GAME.probabilities.normal/7 then
                     if self.ability.handsavailiable ~= 0 then
                         ease_hands_played(1)
+                        card_eval_status_text(self, 'extra', nil, nil, nil, {message = "+1 Hand"})
                         self.ability.handsavailiable = self.ability.handsavailiable - 1
                     end
                     
