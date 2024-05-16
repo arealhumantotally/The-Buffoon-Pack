@@ -278,6 +278,13 @@ function SMODS.INIT.Me_TheBuffoonPack()
             end
         end
     end
+    -- END EXORCIST HERE
+    -- START WHEEL OF DEATH HERE
+    SMODS.Sprite:new("c_WheelOfDeath", thismod.path, "c_SpectralBase.png",71,95, "asset_atli"):register();
+    local WheelOfDeath = SMODS.Spectral:new('WheelOfDeath', 'WheelOfDeath', {}, { x = 0, y = 0 }, {
+        name = 'Wheel Of Death',
+        text = { 'Copy selected card 4 times', '1 in 2 chance to destroy it, and all cards sharing its rank.' }
+    }, 4, nil, true):register()
 end
 
 
