@@ -136,6 +136,10 @@ function SMODS.INIT.Me_TheBuffoonPack()
                     return true
                 end
             }))
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 2,
+            }))
         end
     end
     -- END MANSION JOKER
