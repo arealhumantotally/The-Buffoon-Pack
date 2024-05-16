@@ -187,7 +187,10 @@ function SMODS.INIT.Me_TheBuffoonPack()
         if context.individual and not context.blueprint and context.cardarea == G.play then
             if context.other_card:get_id() == self.ability.targettedID and context.other_card:is_suit(self.ability.targettedsuit) then
                 self.ability.mult = self.ability.mult + 3
-                card_eval_status_text(self, 'extra', nil, nil, nil, {message = "+3 Mult"})
+                return {
+                    extra = {focus = self, message = '+3 Mult', colour = G.C.MULT},
+                    card = self
+                }
             end
         end
         if context.first_hand_drawn and not context.blueprint then
