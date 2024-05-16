@@ -158,15 +158,17 @@ function SMODS.INIT.Me_TheBuffoonPack()
         self.ability.handsavailiable = 5
     end
     SMODS.Jokers.j_Calendar.calculate = function(self,context)
-        if context.individual then
+        if context.individual and context.cardarea == G.play then
             if context.other_card:get_id() == 7 then
                 if pseudorandom('calendar') < G.GAME.probabilities.normal/7 then
                     if self.ability.handsavailiable ~= 0 then
                         ease_hands_played(1)
-                        card_eval_status_text(self, 'extra', nil, nil, nil, {message = "+1 Hand"})
                         self.ability.handsavailiable = self.ability.handsavailiable - 1
+                        return {
+                            extra = {focus = self, message = '+1 Hand', colour = G.C.CHIPS},
+                            card = self
+                        }
                     end
-                    
                 end
             end
         elseif context.first_hand_drawn then
