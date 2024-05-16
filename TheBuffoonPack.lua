@@ -51,9 +51,12 @@ function SMODS.INIT.Me_TheBuffoonPack()
                     sendInfoMessage("Got past loop", "TheBuffoonPack")
                     if loser1.removed == nil and loser1 ~= nil then loser1:start_dissolve(nil,nil,3) end
                     if loser2.removed == nil and loser2 ~= nil then loser2:start_dissolve(nil,nil,3) end
-                    card_eval_status_text(self, 'extra', nil, nil, nil, {message = "DIE!"})
                     return true
                 end
+            }))
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 2,
             }))
             
         elseif context.after and not self.ability.safe then
